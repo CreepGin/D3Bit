@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="D3BitGUI.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ExportFormat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">JSON</Value>
+    </Setting>
+    <Setting Name="Secret" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ScanKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">F12</Value>
+    </Setting>
+    <Setting Name="UploadKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Insert</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
