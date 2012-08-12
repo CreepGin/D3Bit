@@ -1,6 +1,7 @@
 #Project-Specific
 x.png
 x.txt
+[Bb]uild/*.png
 
 #OS junk files
 [Tt]humbs.db

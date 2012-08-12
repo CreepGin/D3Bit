@@ -251,8 +251,6 @@ namespace D3BitGUI
                     n = dps / 1400;
                 if (n > 0.60)
                     total += n * n * 5;
-                else if (n < 0.5)
-                    total = 0;
             }
             
 
@@ -305,11 +303,15 @@ namespace D3BitGUI
 
         private void cbQuality_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cbQuality.SelectedItem == null)
+                return;
             quality = cbQuality.SelectedItem.ToString();
         }
 
         private void cbType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cbType.SelectedItem == null)
+                return;
             type = cbType.SelectedItem.ToString();
             ShowMaxStats(type, affixes);
         }

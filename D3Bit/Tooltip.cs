@@ -58,8 +58,8 @@ namespace D3Bit
                 return itemType;
             ImageUtil.DrawBlockBounding(Processed, itemTypebound);
             Bitmap itemTypeBlock = Original.Clone(itemTypebound.ToRectangle(), Original.PixelFormat);
-            //itemTypeBlock = ImageUtil.ResizeImage(itemTypeBlock, itemTypeBlock.Width * 12, itemTypeBlock.Height * 12);
-            itemTypeBlock = ImageUtil.ResizeImage(itemTypeBlock, (int)(80.0 / itemTypeBlock.Height * itemTypeBlock.Width), 80);
+            itemTypeBlock = ImageUtil.ResizeImage(itemTypeBlock, itemTypeBlock.Width * 10, itemTypeBlock.Height * 10);
+            //itemTypeBlock = ImageUtil.ResizeImage(itemTypeBlock, (int)(80.0 / itemTypeBlock.Height * itemTypeBlock.Width), 80);
             string text = Tesseract.GetTextFromBitmap(itemTypeBlock).Replace("\r", "").Replace("\n", " ");
             var words = text.Split(new[] { ' ' });
             if (words.Length > 1)
