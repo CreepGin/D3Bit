@@ -32,9 +32,9 @@ namespace D3BitGUI
                                                          {"life%", 2},
                                                          {"ar", 3.2},
                                                          {"crit", 3.4},
-                                                         {"critD", 3.4},
+                                                         {"critd", 3.4},
                                                          {"block", 2},
-                                                         {"soc", 1.4},
+                                                         {"soc", 1.4}
                                                      };
 
         public static List<StatTriplet> MaxStats = new List<StatTriplet>

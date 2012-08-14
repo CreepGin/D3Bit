@@ -45,9 +45,11 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lNote = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ucStars1 = new D3BitGUI.UCStars();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // timer1
@@ -278,10 +280,22 @@
             this.lNote.Text = "Note";
             this.lNote.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = global::D3BitGUI.Properties.Resources.x;
+            this.pictureBox1.Location = new System.Drawing.Point(1908, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // ucStars1
             // 
+            this.ucStars1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ucStars1.BackColor = System.Drawing.Color.Black;
-            this.ucStars1.Location = new System.Drawing.Point(1575, 3);
+            this.ucStars1.Location = new System.Drawing.Point(1547, 3);
             this.ucStars1.Name = "ucStars1";
             this.ucStars1.Size = new System.Drawing.Size(355, 71);
             this.ucStars1.TabIndex = 11;
@@ -293,6 +307,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1932, 102);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ucStars1);
             this.Controls.Add(this.lNote);
             this.Controls.Add(this.panel2);
@@ -309,6 +324,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -332,6 +348,7 @@
         private System.Windows.Forms.ComboBox cbQuality;
         private System.Windows.Forms.ComboBox cbType;
         private UCStars ucStars1;
+        private System.Windows.Forms.PictureBox pictureBox1;
 
 
 

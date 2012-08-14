@@ -140,6 +140,11 @@ namespace D3BitGUI
             }
             try
             {
+                /*
+                EncoderParameters myEncoderParameters = new EncoderParameters(1);
+                myEncoderParameters.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, 70L);
+                tooltipBitmap.Save(TOOLTIP_FILEPATH, ImageCodecInfo.GetImageEncoders().Where(c => c.FormatID == ImageFormat.Jpeg.Guid).First(), myEncoderParameters);
+                */
                 tooltipBitmap.Save(TOOLTIP_FILEPATH, ImageFormat.Png);
                 Tooltip tooltip = new Tooltip(tooltipBitmap);
                 _progress++;
@@ -231,6 +236,8 @@ namespace D3BitGUI
                 n = d(v("dex") + v("vit"), m("dex") + m("vit"));
             else
                 n = d(v("int") + v("vit"), m("int") + m("vit"));
+            if (v("vit") < 1)
+                n = n/2.0;
             n = 5.4 * n * n;
             total += n;
             foreach (var weight in Data.starWeights)
@@ -347,6 +354,11 @@ namespace D3BitGUI
                     affixes.Add(parts[1], parts[0]);
             }
             ShowMaxStats(type, affixes);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
     }

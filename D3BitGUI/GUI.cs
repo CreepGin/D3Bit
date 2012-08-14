@@ -83,7 +83,7 @@ namespace D3BitGUI
         {
             if (e.KeyCode == (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.ScanKey))
             {
-                if (_overlay == null)
+                if (_overlay == null || _overlay.IsDisposed)
                 {
                     var procs = Process.GetProcessesByName("Diablo III");
                     if (procs.Length > 0)

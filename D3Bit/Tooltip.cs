@@ -46,7 +46,7 @@ namespace D3Bit
         public string ParseItemType(out string quality)
         {
             string itemType = "Unknown";
-            quality = "Unknown";
+            quality = "Rare";
             Func<Color, bool> colorFunc =
                 c =>
                 ImageUtil.GetGrayValue(c) > 130 && !(Math.Abs(c.R - c.G) < 30 && Math.Abs(c.G - c.B) < 30);
