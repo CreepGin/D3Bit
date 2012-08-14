@@ -6,11 +6,14 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
+using NHunspell;
 
 namespace D3Bit
 {
     public static class Tesseract
     {
+        private static Hunspell hunspell = new Hunspell("en_us.aff", "en_us.dic");
+
         public static string GetTextFromBitmap(Bitmap bitmap)
         {
             return GetTextFromBitmap(bitmap, @"nobatch tesseract\d3letters");
@@ -33,5 +36,21 @@ namespace D3Bit
             //File.Delete(@"tesseract\x.txt");
             return res.Trim();
         }
+
+        public static string CorrectSpelling(string text)
+        {
+            string[] words = text.Split(new[] { ' ' });
+            string res = "";
+            foreach (var word in words)
+            {
+                var suggestions = hunspell.Suggest(word);
+                if (suggestions.Count > 0 && !hunspell.Spell(word))
+                    res += suggestions[0] + " ";
+                else
+                    res += word + " ";
+            }
+            return res.Trim();
+        }
+
     }
 }

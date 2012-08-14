@@ -39,14 +39,15 @@ namespace D3Bit
             //itemNameBlock = ImageUtil.ResizeImage(itemNameBlock, itemNameBlock.Width * 10, itemNameBlock.Height * 10);
             itemNameBlock = ImageUtil.ResizeImage(itemNameBlock, (int)(90.0 / itemNameBlock.Height * itemNameBlock.Width), 90);
             itemName = Tesseract.GetTextFromBitmap(itemNameBlock).Replace("\r", "").Replace("\n", " ").Replace("GB", "O").Replace("G3", "O").Replace("EB", "O").Replace("G9", "O");
-            itemName = Regex.Replace(itemName, "([AEIOUM]|^)ITI", "$1M");
+            itemName = Tesseract.CorrectSpelling(itemName);
+            //itemName = Regex.Replace(itemName, "([AEIOUM]|^)ITI", "$1M");
             return itemName;
         }
 
         public string ParseItemType(out string quality)
         {
             string itemType = "Unknown";
-            quality = "Rare";
+            quality = "Unknown";
             Func<Color, bool> colorFunc =
                 c =>
                 ImageUtil.GetGrayValue(c) > 130 && !(Math.Abs(c.R - c.G) < 30 && Math.Abs(c.G - c.B) < 30);
