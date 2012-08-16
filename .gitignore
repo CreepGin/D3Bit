@@ -1,6 +1,6 @@
 #Project-Specific
-x.png
-x.txt
+*/tesseract/x.png
+*/tesseract/x.txt
 [Bb]uild/*.png
 
 #OS junk files
