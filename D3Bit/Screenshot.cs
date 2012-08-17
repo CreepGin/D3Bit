@@ -165,7 +165,7 @@ namespace D3Bit
 
         public static Bitmap GetToolTip(Bitmap bitmap)
         {
-            var lines = ImageUtil.FindHorizontalLines(bitmap, 280, 500, new int[] { 0, 8, 0, 8, 0, 8 });
+            var lines = ImageUtil.FindHorizontalLines(bitmap, 280, 500, new int[] { 0, 12, 0, 12, 0, 12 });
             lines = lines.OrderBy(l => l.P1.X).ToList();
             var groups =
                 lines.GroupBy(l => l.P1.X).Where(

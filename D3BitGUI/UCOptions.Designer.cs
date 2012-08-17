@@ -31,6 +31,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cbUploadTo = new System.Windows.Forms.ComboBox();
             this.cbUploadKey = new System.Windows.Forms.ComboBox();
             this.cbScanKey = new System.Windows.Forms.ComboBox();
             this.tbSecret = new System.Windows.Forms.TextBox();
@@ -39,7 +41,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 7);
+            this.label1.Location = new System.Drawing.Point(25, 7);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 13);
             this.label1.TabIndex = 0;
@@ -48,7 +50,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 33);
+            this.label2.Location = new System.Drawing.Point(10, 33);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 2;
@@ -57,11 +59,34 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 60);
+            this.label3.Location = new System.Drawing.Point(1, 60);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Upload Key:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 87);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(60, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Upload To:";
+            // 
+            // cbUploadTo
+            // 
+            this.cbUploadTo.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::D3BitGUI.Properties.Settings.Default, "UploadTo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbUploadTo.FormattingEnabled = true;
+            this.cbUploadTo.Items.AddRange(new object[] {
+            "D3Bit",
+            "Imgur"});
+            this.cbUploadTo.Location = new System.Drawing.Point(69, 84);
+            this.cbUploadTo.Name = "cbUploadTo";
+            this.cbUploadTo.Size = new System.Drawing.Size(116, 21);
+            this.cbUploadTo.TabIndex = 7;
+            this.cbUploadTo.Text = global::D3BitGUI.Properties.Settings.Default.UploadTo;
+            this.cbUploadTo.SelectedIndexChanged += new System.EventHandler(this.cbUploadTo_SelectedIndexChanged);
             // 
             // cbUploadKey
             // 
@@ -88,7 +113,7 @@
             "End",
             "PageUp",
             "PageDown"});
-            this.cbUploadKey.Location = new System.Drawing.Point(67, 57);
+            this.cbUploadKey.Location = new System.Drawing.Point(69, 57);
             this.cbUploadKey.Name = "cbUploadKey";
             this.cbUploadKey.Size = new System.Drawing.Size(116, 21);
             this.cbUploadKey.TabIndex = 5;
@@ -120,7 +145,7 @@
             "End",
             "PageUp",
             "PageDown"});
-            this.cbScanKey.Location = new System.Drawing.Point(67, 30);
+            this.cbScanKey.Location = new System.Drawing.Point(69, 30);
             this.cbScanKey.Name = "cbScanKey";
             this.cbScanKey.Size = new System.Drawing.Size(116, 21);
             this.cbScanKey.TabIndex = 3;
@@ -132,9 +157,9 @@
             this.tbSecret.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbSecret.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::D3BitGUI.Properties.Settings.Default, "Secret", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.tbSecret.Location = new System.Drawing.Point(52, 4);
+            this.tbSecret.Location = new System.Drawing.Point(68, 4);
             this.tbSecret.Name = "tbSecret";
-            this.tbSecret.Size = new System.Drawing.Size(131, 20);
+            this.tbSecret.Size = new System.Drawing.Size(117, 20);
             this.tbSecret.TabIndex = 1;
             this.tbSecret.Text = global::D3BitGUI.Properties.Settings.Default.Secret;
             this.tbSecret.TextChanged += new System.EventHandler(this.tbSecret_TextChanged);
@@ -143,6 +168,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cbUploadTo);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.cbUploadKey);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cbScanKey);
@@ -164,5 +191,7 @@
         private System.Windows.Forms.ComboBox cbScanKey;
         private System.Windows.Forms.ComboBox cbUploadKey;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cbUploadTo;
     }
 }

@@ -70,5 +70,17 @@ namespace D3BitGUI.Properties {
                 this["UploadKey"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D3Bit")]
+        public string UploadTo {
+            get {
+                return ((string)(this["UploadTo"]));
+            }
+            set {
+                this["UploadTo"] = value;
+            }
+        }
     }
 }

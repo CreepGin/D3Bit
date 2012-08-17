@@ -69,13 +69,10 @@ namespace D3BitGUI
             uploadingLabel.Size = new Size(800, 100);
             this.UIThread(() => Controls.Add(uploadingLabel));
 
-            if (Properties.Settings.Default.Secret.Trim() == "")
+            byte[] data = File.ReadAllBytes(TOOLTIP_FILEPATH);
+
+            if (Properties.Settings.Default.UploadTo == "D3Bit")
             {
-                this.UIThread(() => uploadingLabel.Text = "You need to enter your secret first.");
-            }
-            else
-            {
-                byte[] data = File.ReadAllBytes(TOOLTIP_FILEPATH);
                 Dictionary<string, object> postParameters = new Dictionary<string, object>();
                 postParameters.Add("filename", Path.GetFileName(TOOLTIP_FILEPATH));
                 postParameters.Add("fileformat", Path.GetExtension(TOOLTIP_FILEPATH));
@@ -91,27 +88,30 @@ namespace D3BitGUI
                 /*
                 Func<string, string> u = System.Uri.EscapeDataString;
                 string url = string.Format("http://d3bit.com/ajax/uploaditem/?n={0}&q={1}&d={2}&t={3}&a={4}&s={5}",
-                                           u(name),
-                                           u(quality), u(dps + ""), u(type),
-                                           u(String.Join(", ", affixes.Select(kv => (kv.Value + " " + kv.Key).Trim()))),
-                                           u(Properties.Settings.Default.Secret));
+                                            u(name),
+                                            u(quality), u(dps + ""), u(type),
+                                            u(String.Join(", ", affixes.Select(kv => (kv.Value + " " + kv.Key).Trim()))),
+                                            u(Properties.Settings.Default.Secret));
                 string json = Util.GetPageSource(url);
                 */
 
                 // Create request and receive response
                 string postURL = "http://d3bit.com/ajax/uploaditem/";
-                string userAgent = "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3";
+                string userAgent =
+                    "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3";
                 HttpWebResponse webResponse = Util.MultipartFormDataPost(postURL, userAgent, postParameters);
                 StreamReader responseReader = new StreamReader(webResponse.GetResponseStream());
                 string res = responseReader.ReadToEnd();
                 webResponse.Close();
 
-                
+
                 JObject o = JObject.Parse(res);
                 if (o["status"] != null && o["status"].ToString() == "success" && o["link"] != null)
                 {
                     this.UIThread(() => Clipboard.SetText(o["link"].ToString()));
-                    this.UIThread(() => uploadingLabel.Text = string.Format("Success! Link {0} copied to Clipboard.", o["link"]));
+                    this.UIThread(
+                        () => uploadingLabel.Text = string.Format("Success! Link {0} copied to Clipboard.", o["link"]));
+                    GUI.Log("Uploaded. {0}", o["link"]);
                 }
                 else if (o["msg"] != null)
                 {
@@ -121,7 +121,38 @@ namespace D3BitGUI
                 {
                     this.UIThread(() => uploadingLabel.Text = "Error Uploading.");
                 }
-                //this.UIThread(() => Clipboard.SetText(res));
+            }
+            else if (Properties.Settings.Default.UploadTo == "Imgur")
+            {
+                Dictionary<string, object> postParameters = new Dictionary<string, object>();
+                postParameters.Add("filename", Path.GetFileName(TOOLTIP_FILEPATH));
+                postParameters.Add("fileformat", Path.GetExtension(TOOLTIP_FILEPATH));
+                postParameters.Add("key", "4c379d346aaf18a942734de377c4cda0");
+                postParameters.Add("title", "Uploaded from D3Bit.com");
+                postParameters.Add("caption", string.Format("Name: {4}, Quality: {0} Type: {1} DPS/Armor: {2} Stats: {3}", quality, type, dps, stats, name));
+                postParameters.Add("image", data);
+
+                string postURL = "http://api.imgur.com/2/upload.json";
+                string userAgent =
+                    "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3";
+                HttpWebResponse webResponse = Util.MultipartFormDataPost(postURL, userAgent, postParameters);
+                StreamReader responseReader = new StreamReader(webResponse.GetResponseStream());
+                string res = responseReader.ReadToEnd();
+                webResponse.Close();
+
+                JObject o = JObject.Parse(res);
+                if (o["upload"] != null && o["upload"]["links"] != null && o["upload"]["links"]["imgur_page"] != null)
+                {
+                    string link = o["upload"]["links"]["imgur_page"].ToString();
+                    this.UIThread(() => Clipboard.SetText(link));
+                    this.UIThread(
+                        () => uploadingLabel.Text = string.Format("Success! Link {0} copied to Clipboard.", link));
+                    GUI.Log("Uploaded. {0}", link);
+                }
+                else
+                {
+                    this.UIThread(() => uploadingLabel.Text = "Error Uploading.");
+                }
             }
 
             Thread.Sleep(5000);
@@ -230,15 +261,15 @@ namespace D3BitGUI
             Func<double, double, double> d = (d1, d2) => d2 == 0 ? 0 : d1/d2;
 
             double n = 0;
-            if (v("str") > 0)
+            if (v("str") > 0 && v("str") >= v("dex") && v("str") >= v("int"))
                 n =d(v("str") + v("vit"), m("str") + m("vit"));
-            else if (v("dex") > 0)
+            else if (v("dex") > 0 && v("dex") >= v("str") && v("dex") >= v("int"))
                 n = d(v("dex") + v("vit"), m("dex") + m("vit"));
             else
                 n = d(v("int") + v("vit"), m("int") + m("vit"));
             if (v("vit") < 1)
                 n = n/2.0;
-            n = 5.4 * n * n;
+            n = 6.4 * n * n;
             total += n;
             foreach (var weight in Data.starWeights)
             {
@@ -256,8 +287,10 @@ namespace D3BitGUI
                     n = dps/1800;
                 else
                     n = dps / 1400;
+                if (n > 1)
+                    n = 1;
                 if (n > 0.60)
-                    total += n * n * 5;
+                    total += n * n * 6;
             }
             
 

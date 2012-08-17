@@ -156,6 +156,11 @@ namespace D3BitGUI
             Process.Start(e.LinkText);
         }
 
+        private void ucOptions1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         
 
     }

@@ -53,7 +53,7 @@
             this.tabControl1.Location = new System.Drawing.Point(2, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(197, 115);
+            this.tabControl1.Size = new System.Drawing.Size(197, 136);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -62,7 +62,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(189, 89);
+            this.tabPage1.Size = new System.Drawing.Size(189, 110);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Options";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -73,7 +73,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(189, 89);
+            this.tabPage3.Size = new System.Drawing.Size(189, 110);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Batch";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -87,7 +87,7 @@
             this.rtbDebug.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbDebug.Location = new System.Drawing.Point(2, 2);
             this.rtbDebug.Name = "rtbDebug";
-            this.rtbDebug.Size = new System.Drawing.Size(190, 103);
+            this.rtbDebug.Size = new System.Drawing.Size(190, 107);
             this.rtbDebug.TabIndex = 1;
             this.rtbDebug.Text = "";
             this.rtbDebug.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.rtbDebug_LinkClicked);
@@ -105,17 +105,18 @@
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.rtbDebug);
-            this.panel1.Location = new System.Drawing.Point(2, 118);
+            this.panel1.Location = new System.Drawing.Point(2, 139);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(196, 109);
+            this.panel1.Size = new System.Drawing.Size(196, 113);
             this.panel1.TabIndex = 1;
             // 
             // ucOptions1
             // 
             this.ucOptions1.Location = new System.Drawing.Point(0, 0);
             this.ucOptions1.Name = "ucOptions1";
-            this.ucOptions1.Size = new System.Drawing.Size(190, 89);
+            this.ucOptions1.Size = new System.Drawing.Size(190, 114);
             this.ucOptions1.TabIndex = 0;
+            this.ucOptions1.Load += new System.EventHandler(this.ucOptions1_Load);
             // 
             // ucBatch1
             // 
@@ -130,7 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(200, 229);
+            this.ClientSize = new System.Drawing.Size(200, 254);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

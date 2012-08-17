@@ -28,7 +28,7 @@ namespace D3BitGUI
                                                          {"atkspd", 2},
                                                          {"gf", 2},
                                                          {"mf", 2},
-                                                         {"loh", 4.2},
+                                                         {"loh", 3.4},
                                                          {"life%", 2},
                                                          {"ar", 3.2},
                                                          {"crit", 3.4},
