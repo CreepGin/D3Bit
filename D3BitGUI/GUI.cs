@@ -58,6 +58,7 @@ namespace D3BitGUI
                                });
             t.Start();
             Text += " " + version;
+            notifyIcon1.Text = "D3Bit " + version;
             /*
             var s = new StopWatch();
             Bitmap bitmap = new Bitmap("x.jpg");

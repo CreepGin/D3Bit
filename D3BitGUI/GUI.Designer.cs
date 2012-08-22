@@ -32,13 +32,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GUI));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.ucOptions1 = new D3BitGUI.UCOptions();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.ucBatch1 = new D3BitGUI.UCBatch();
             this.rtbDebug = new System.Windows.Forms.RichTextBox();
             this.tUpdater = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.ucOptions1 = new D3BitGUI.UCOptions();
-            this.ucBatch1 = new D3BitGUI.UCBatch();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,6 +72,14 @@
             this.tabPage1.Text = "Options";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // ucOptions1
+            // 
+            this.ucOptions1.Location = new System.Drawing.Point(0, 0);
+            this.ucOptions1.Name = "ucOptions1";
+            this.ucOptions1.Size = new System.Drawing.Size(190, 114);
+            this.ucOptions1.TabIndex = 0;
+            this.ucOptions1.Load += new System.EventHandler(this.ucOptions1_Load);
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.ucBatch1);
@@ -82,6 +90,15 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Batch";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // ucBatch1
+            // 
+            this.ucBatch1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ucBatch1.Location = new System.Drawing.Point(4, 4);
+            this.ucBatch1.Name = "ucBatch1";
+            this.ucBatch1.Size = new System.Drawing.Size(182, 85);
+            this.ucBatch1.TabIndex = 0;
             // 
             // rtbDebug
             // 
@@ -122,26 +139,9 @@
             this.notifyIcon1.BalloonTipTitle = "D3Bit";
             this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Text = "D3Bit";
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
-            // 
-            // ucOptions1
-            // 
-            this.ucOptions1.Location = new System.Drawing.Point(0, 0);
-            this.ucOptions1.Name = "ucOptions1";
-            this.ucOptions1.Size = new System.Drawing.Size(190, 114);
-            this.ucOptions1.TabIndex = 0;
-            this.ucOptions1.Load += new System.EventHandler(this.ucOptions1_Load);
-            // 
-            // ucBatch1
-            // 
-            this.ucBatch1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ucBatch1.Location = new System.Drawing.Point(4, 4);
-            this.ucBatch1.Name = "ucBatch1";
-            this.ucBatch1.Size = new System.Drawing.Size(182, 85);
-            this.ucBatch1.TabIndex = 0;
             // 
             // contextMenuStrip1
             // 
@@ -149,21 +149,21 @@
             this.toolStripMenuItem1,
             this.toolStripMenuItem2});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(104, 48);
             this.contextMenuStrip1.Text = "Show";
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(103, 22);
             this.toolStripMenuItem1.Text = "Show";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(103, 22);
             this.toolStripMenuItem2.Text = "Exit";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
