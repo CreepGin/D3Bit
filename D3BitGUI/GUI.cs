@@ -161,6 +161,44 @@ namespace D3BitGUI
 
         }
 
+        private void GUI_Resize(object sender, EventArgs e)
+        {
+            if (FormWindowState.Minimized == this.WindowState)
+            {
+                notifyIcon1.Visible = true;
+                notifyIcon1.ShowBalloonTip(500);
+                this.Hide();
+            }
+            else if (FormWindowState.Normal == this.WindowState)
+            {
+                notifyIcon1.Visible = false;
+            }
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            notifyIcon1.Visible = false;
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            notifyIcon1.Visible = false;
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         
 
     }

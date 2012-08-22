@@ -132,9 +132,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\closeButton.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

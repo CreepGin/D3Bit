@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -10,6 +11,7 @@ namespace D3Bit
     public class Tooltip
     {
         public Bitmap Original { get; private set; }
+        public Bitmap Resized { get; private set; }
         public Bitmap Processed { get; private set; }
 
         private int _affixStartY;
@@ -17,25 +19,26 @@ namespace D3Bit
         public Tooltip(Bitmap bitmap)
         {
             Original = bitmap;
-            Processed = (Bitmap)Original.Clone();   //Modifiable, used for improvement
+            Resized = ImageUtil.ResizeImage(bitmap, 400, (int)(400.0 / bitmap.Width * bitmap.Height));
+            Processed = (Bitmap)Resized.Clone();   //Modifiable, used for improvement and drawing
             _affixStartY = s(88/320.0);
         }
 
         //Convinience scaling function
         int s(double scale)
         {
-            return (int)Math.Round(scale * Original.Width);
+            return (int)Math.Round(scale * Resized.Width);
         }
 
         public string ParseItemName()
         {
             string itemName = "Unknown";
-            Bound itemNamebound = ImageUtil.GetBlockBounding(Original,
+            Bound itemNamebound = ImageUtil.GetBlockBounding(Resized,
                                                                  new Bound(new Point(s(15/410.0), s(15/410.0)), new Point(s(395/410.0), s(52/410.0)))).Expand(4);
             if (itemNamebound.Width < 20)
                 return itemName;
             ImageUtil.DrawBlockBounding(Processed, itemNamebound);
-            Bitmap itemNameBlock = Original.Clone(itemNamebound.ToRectangle(), Processed.PixelFormat);
+            Bitmap itemNameBlock = Resized.Clone(itemNamebound.ToRectangle(), Processed.PixelFormat);
             //itemNameBlock = ImageUtil.ResizeImage(itemNameBlock, itemNameBlock.Width * 10, itemNameBlock.Height * 10);
             itemNameBlock = ImageUtil.ResizeImage(itemNameBlock, (int)(90.0 / itemNameBlock.Height * itemNameBlock.Width), 90);
             itemName = Tesseract.GetTextFromBitmap(itemNameBlock).Replace("\r", "").Replace("\n", " ").Replace("GB", "O").Replace("G3", "O").Replace("EB", "O").Replace("G9", "O");
@@ -51,17 +54,17 @@ namespace D3Bit
             Func<Color, bool> colorFunc =
                 c =>
                 ImageUtil.GetGrayValue(c) > 130 && !(Math.Abs(c.R - c.G) < 30 && Math.Abs(c.G - c.B) < 30);
-            Bound itemTypebound = ImageUtil.GetBlockBounding(Original,
-                                                                 new Bound(new Point(s(82 / 410.0), s(55 / 410.0)), new Point(s(270 / 410.0), s(105 / 410.0))), colorFunc).Expand(4);
-            if (itemTypebound.Height > 38)
-                itemTypebound = new Bound(new Point(itemTypebound.P1.X, itemTypebound.P1.Y), new Point(itemTypebound.P2.X, itemTypebound.P1.Y + s(38 / 411.0)));
-            if (itemTypebound.Width < 20)
+            Bound itemTypebound = ImageUtil.GetBlockBounding(Resized,
+                                                                 new Bound(new Point(s(82 / 410.0), s(55 / 410.0)), new Point(s(270 / 410.0), s(90 / 410.0))), colorFunc).Expand(6);
+            if (itemTypebound.Height > s(30 / 411.0))
+                itemTypebound = new Bound(new Point(itemTypebound.P1.X, itemTypebound.P1.Y), new Point(itemTypebound.P2.X, itemTypebound.P1.Y + s(30 / 411.0)));
+            if (itemTypebound.Width < 5)
                 return itemType;
             ImageUtil.DrawBlockBounding(Processed, itemTypebound);
-            Bitmap itemTypeBlock = Original.Clone(itemTypebound.ToRectangle(), Original.PixelFormat);
-            itemTypeBlock = ImageUtil.ResizeImage(itemTypeBlock, itemTypeBlock.Width * 10, itemTypeBlock.Height * 10);
+            Bitmap itemTypeBlock = Resized.Clone(itemTypebound.ToRectangle(), Resized.PixelFormat);
+            itemTypeBlock = ImageUtil.ResizeImage(itemTypeBlock, itemTypeBlock.Width * 8, itemTypeBlock.Height * 8);
             //itemTypeBlock = ImageUtil.ResizeImage(itemTypeBlock, (int)(80.0 / itemTypeBlock.Height * itemTypeBlock.Width), 80);
-            string text = Tesseract.GetTextFromBitmap(itemTypeBlock).Replace("\r", "").Replace("\n", " ");
+            string text = Tesseract.GetTextFromBitmap(ImageUtil.Sharpen(itemTypeBlock)).Replace("\r", "").Replace("\n", " ");
             var words = text.Split(new[] { ' ' });
             if (words.Length > 1)
             {
@@ -81,14 +84,14 @@ namespace D3Bit
             Func<Color, bool> colorFunc =
                 c =>
                 ImageUtil.GetGrayValue(c) > 240 && (Math.Abs(c.R - c.G) < 5 && Math.Abs(c.G - c.B) < 5);
-            Bound dpsBound = ImageUtil.GetBlockBounding(Original,
-                                                                 new Bound(new Point(s(82 / 410.0), s(86 / 410.0)), new Point(s(228 / 410.0), s(160 / 410.0))), colorFunc).Expand(s(10/410.0));
+            Bound dpsBound = ImageUtil.GetBlockBounding(Resized,
+                                                                 new Bound(new Point(s(82 / 410.0), s(86 / 410.0)), new Point(s(238 / 410.0), s(160 / 410.0))), colorFunc).Expand(s(10/410.0));
             if (dpsBound.Width < 24)
                 return dps;
             _affixStartY = dpsBound.P2.Y;
             ImageUtil.DrawBlockBounding(Processed, dpsBound);
             //dpsBound = new Bound(new Point(dpsBound.P1.X, dpsBound.P1.Y), new Point(dpsBound.P2.X + 150, dpsBound.P2.Y));
-            Bitmap dpsBlock = Original.Clone(dpsBound.ToRectangle(), Original.PixelFormat);
+            Bitmap dpsBlock = Resized.Clone(dpsBound.ToRectangle(), Resized.PixelFormat);
             dpsBlock = ImageUtil.ResizeImage(dpsBlock, (int)(22.0 / dpsBlock.Height * dpsBlock.Width), 22);
             //dpsBlock = ImageUtil.ImproveForOCR(dpsBlock);
             //dpsBlock = ImageUtil.DpsFix(dpsBlock);
@@ -110,7 +113,7 @@ namespace D3Bit
                 bool found = false;
                 for (int x = s(58 / 320.0); x < s(74 / 320.0); x += 1)
                 {
-                    Color c = Original.GetPixel(x, y);
+                    Color c = Resized.GetPixel(x, y);
                     if (c.B > 150 && c.G < 120 && c.R < 120)
                     {
                         found = true;
@@ -124,9 +127,9 @@ namespace D3Bit
                 }
             }
 
-            var bounds = ImageUtil.GetTextLineBounds(Original,
+            var bounds = ImageUtil.GetTextLineBounds(Resized,
                                                      new Bound(new Point(s(6 / 320.0), _affixStartY),
-                                                               new Point(s(300/320.0), Original.Height - s(54/320.0))),
+                                                               new Point(s(300/320.0), Resized.Height - s(54/320.0))),
                                                      s(10/320.0),
                                                      colorFunc, s(58 / 320.0), s(74 / 320.0));
             Dictionary<string, string> res = new Dictionary<string, string>();
@@ -135,11 +138,11 @@ namespace D3Bit
                 if (bound.Width < 20)
                     continue;
                 ImageUtil.DrawBlockBounding(Processed, bound);
-                var block = Original.Clone(bound.Expand(3).ToRectangle(), Original.PixelFormat);
-                //block = ImageUtil.ResizeImage(block, block.Width*10, block.Height*10);
-                block = ImageUtil.ResizeImage(block, (int)(80.0 / block.Height * block.Width), 80);
+                var block = Resized.Clone(bound.Expand(4).ToRectangle(), Resized.PixelFormat);
+                block = ImageUtil.ResizeImage(block, block.Width*6, block.Height*6);
+                //block = ImageUtil.ResizeImage(block, (int)(80.0 / block.Height * block.Width), 80);
                 string text = Tesseract.GetTextFromBitmap(block);
-                if (Enumerable.Range(s(58 / 320.0), 15).Where(x => whiteFunc(Original.GetPixel(x, bound.P1.Y + 4))).Count() > 0)
+                if (Enumerable.Range(s(58 / 320.0), 15).Where(x => whiteFunc(Resized.GetPixel(x, bound.P1.Y + 4))).Count() > 0)
                     affixStrings.Add("Empty Socket");
                 else if (bound.P1.X < s(16/320.0))
                     affixStrings[affixStrings.Count - 1] += " " + text;
@@ -172,7 +175,26 @@ namespace D3Bit
                     res[pair.Key] = (int.Parse(res[pair.Key]) + 1).ToString();
             }
 
-            return res;
+            //Corrections (need to extract this to another class/method)
+            Dictionary<string, string> finalRes = new Dictionary<string, string>();
+            foreach (var r in res)
+            {
+                string key = r.Key;
+                string value = r.Value;
+                if (key == "Life%")
+                {
+                    int n;
+                    if (int.TryParse(value, out n))
+                    {
+                        if (n > 20)
+                            n = int.Parse(n.ToString().Substring(0, 1));
+                        value = n.ToString();
+                    }
+                }
+                finalRes.Add(key, value);
+            }
+
+            return finalRes;
         }
 
     }
