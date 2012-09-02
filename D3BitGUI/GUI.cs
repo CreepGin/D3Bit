@@ -21,7 +21,7 @@ namespace D3BitGUI
 {
     public partial class GUI : Form
     {
-        private static string version = "1.1.2";
+        private static string version = "1.1.3";
 #if DEBUG
         private static bool debugMode = true;
 #else
@@ -82,6 +82,7 @@ namespace D3BitGUI
 
         public void OnKeyUp(object sender, KeyEventArgs e)
         {
+            /*
             if (e.KeyCode == (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.ScanKey))
             {
                 if (_overlay == null || _overlay.IsDisposed)
@@ -105,6 +106,20 @@ namespace D3BitGUI
             else if (e.KeyCode == (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.UploadKey) && _overlay != null && _overlay.Loaded && !_overlay.Uploading)
             {
                 (new Thread(_overlay.Upload)).Start();
+            }
+            */
+            if (e.KeyCode == (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.ScanKey))
+            {
+                
+                var procs = Process.GetProcessesByName("Diablo III");
+                if (procs.Length > 0)
+                {
+                    Bitmap bitmap = Screenshot.GetSnapShot(procs[0]);
+                    bitmap.Save("last_screen.png", ImageFormat.Png);
+                    var c = new CardForm(bitmap);
+                    c.Show();
+                    c.BringToFront();
+                }
             }
         }
 

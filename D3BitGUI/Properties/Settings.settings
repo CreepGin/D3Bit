@@ -17,5 +17,8 @@
     <Setting Name="UploadTo" Type="System.String" Scope="User">
       <Value Profile="(Default)">D3Bit</Value>
     </Setting>
+    <Setting Name="Battletag" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -161,7 +161,16 @@ namespace D3Bit
                 List<string> values = new List<string>();
                 Match m = Regex.Match(text, "[0-9]+-[0-9]+");
                 if (m.Success)
+                {
+                    if (pair.Key == "Dmg")
+                    {
+                        var parts = m.Value.Split(new char[] {'-'});
+                        res.Add("MinD", parts[0]);
+                        res.Add("MaxD", parts[1]);
+                        continue;
+                    }
                     values.Add(m.Value);
+                }
                 else if ((m = Regex.Match(text, "[0-9\\.]+")).Success)
                     values.Add(m.Value);
 

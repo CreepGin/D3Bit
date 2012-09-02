@@ -133,5 +133,12 @@ namespace D3BitGUI
             }
         }
 
+        public static string FormGetString(Dictionary<string, string> dict)
+        {
+            Func<string, string> u = System.Uri.EscapeDataString;
+            string res = String.Join("&", dict.Select(d => d.Key + "=" + u(d.Value)));
+            return res;
+        }
+
     }
 }

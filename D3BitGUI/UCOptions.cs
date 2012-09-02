@@ -30,15 +30,9 @@ namespace D3BitGUI
             Properties.Settings.Default.Save();
         }
 
-        private void cbUploadKey_SelectedIndexChanged(object sender, EventArgs e)
+        private void tbBattletag_TextChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.UploadKey = cbUploadKey.SelectedItem.ToString();
-            Properties.Settings.Default.Save();
-        }
-
-        private void cbUploadTo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.UploadTo = cbUploadTo.SelectedItem.ToString();
+            Properties.Settings.Default.Battletag = tbBattletag.Text;
             Properties.Settings.Default.Save();
         }
 

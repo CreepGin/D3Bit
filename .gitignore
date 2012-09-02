@@ -2,6 +2,8 @@
 */tesseract/x.png
 */tesseract/x.txt
 [Bb]uild/*.png
+*/tmp/*.png
+export.*
 
 #OS junk files
 [Tt]humbs.db

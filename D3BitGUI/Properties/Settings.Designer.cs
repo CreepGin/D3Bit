@@ -82,5 +82,17 @@ namespace D3BitGUI.Properties {
                 this["UploadTo"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Battletag {
+            get {
+                return ((string)(this["Battletag"]));
+            }
+            set {
+                this["Battletag"] = value;
+            }
+        }
     }
 }
