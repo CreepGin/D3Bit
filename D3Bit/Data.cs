@@ -138,6 +138,8 @@ namespace D3Bit
                                                                  {"RDElite", "Reduces damage from elites by {I}%."},
                                                                  {"RDMelee", "Reduces damage from melee attacks by {I}%."},
                                                                  {"RDRanged", "Reduces damage from ranged attacks by {I}%."},
+                                                                 //Damage Increase
+                                                                 {"IDElite", "Increase Damage Against Elites by {I}%."},
                                                                  //Misc
                                                                  {"Armor", "+{I} Armor"},
                                                                  {"Block", "+{I}% Chance to Block"},
