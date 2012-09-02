@@ -21,7 +21,7 @@ namespace D3BitGUI
 {
     public partial class GUI : Form
     {
-        private static string version = "1.1.3";
+        private static string version = "1.1.4";
 #if DEBUG
         private static bool debugMode = true;
 #else
