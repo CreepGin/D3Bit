@@ -21,7 +21,7 @@ namespace D3BitGUI
 {
     public partial class GUI : Form
     {
-        private static string version = "1.1.4";
+        private static string version = "1.1.5";
 #if DEBUG
         private static bool debugMode = true;
 #else
@@ -59,6 +59,8 @@ namespace D3BitGUI
             t.Start();
             Text += " " + version;
             notifyIcon1.Text = "D3Bit " + version;
+            (new System.IO.DirectoryInfo("tmp")).Empty();
+
             /*
             var s = new StopWatch();
             Bitmap bitmap = new Bitmap("x.jpg");

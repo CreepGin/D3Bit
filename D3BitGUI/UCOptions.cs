@@ -16,6 +16,9 @@ namespace D3BitGUI
             InitializeComponent();
             if (LicenseManager.UsageMode != LicenseUsageMode.Runtime)
                 return;
+            //Tooltips
+            toolTip.SetToolTip(tbBattletag, "Will be used for fetching your BNet profile in the future.");
+            toolTip.SetToolTip(tbSecret, "Your account secret can be obtained after logging in on d3bit.com");
         }
 
         private void tbSecret_TextChanged(object sender, EventArgs e)

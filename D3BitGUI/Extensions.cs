@@ -33,6 +33,12 @@ namespace D3BitGUI
             }
         }
 
+        public static void Empty(this System.IO.DirectoryInfo directory)
+        {
+            foreach (System.IO.FileInfo file in directory.GetFiles()) file.Delete();
+            foreach (System.IO.DirectoryInfo subDirectory in directory.GetDirectories()) subDirectory.Delete(true);
+        }
+
         /// <summary>
         /// Executes the Action asynchronously on the UI thread, does not block execution on the calling thread.
         /// </summary>

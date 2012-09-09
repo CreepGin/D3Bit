@@ -25,47 +25,7 @@ namespace D3BitGUI
             Thread t = new Thread(()=>
                                       {
                                           byte[] data = File.ReadAllBytes(_cardForm.TooltipPath);
-                                          if (destin == "d3bit")
-                                          {
-                                              Dictionary<string, object> postParameters = new Dictionary<string, object>();
-                                              postParameters.Add("filename", Path.GetFileName(_cardForm.TooltipPath));
-                                              postParameters.Add("fileformat", Path.GetExtension(_cardForm.TooltipPath));
-                                              postParameters.Add("xyz", "placeholder");
-                                              postParameters.Add("n", itemName);
-                                              postParameters.Add("q", itemQuality);
-                                              postParameters.Add("d", itemDps);
-                                              postParameters.Add("t", itemType);
-                                              postParameters.Add("a", itemStats);
-                                              postParameters.Add("s", Properties.Settings.Default.Secret.Trim());
-                                              postParameters.Add("uploadedfile", data);
-
-                                              // Create request and receive response
-                                              string postURL = "http://d3bit.com/ajax/uploaditem/";
-                                              string userAgent =
-                                                  "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3";
-                                              HttpWebResponse webResponse = Util.MultipartFormDataPost(postURL, userAgent, postParameters);
-                                              StreamReader responseReader = new StreamReader(webResponse.GetResponseStream());
-                                              string res = responseReader.ReadToEnd();
-                                              webResponse.Close();
-
-                                              JObject o = JObject.Parse(res);
-                                              if (o["status"] != null && o["status"].ToString() == "success" && o["link"] != null)
-                                              {
-                                                  _cardForm.UIThread(() => Clipboard.SetText(o["link"].ToString()));
-                                                  InvokeScript("Signal", string.Format("Success! Link {0} copied to Clipboard.", o["link"]));
-
-                                                  GUI.Log("Uploaded. {0}", o["link"]);
-                                              }
-                                              else if (o["msg"] != null)
-                                              {
-                                                  InvokeScript("Signal", o["msg"]);
-                                              }
-                                              else
-                                              {
-                                                  InvokeScript("Signal", "Error Uploading.");
-                                              }
-                                          }
-                                          else if (destin == "imgur")
+                                          if (destin == "imgur")
                                           {
                                               Dictionary<string, object> postParameters = new Dictionary<string, object>();
                                               postParameters.Add("filename", Path.GetFileName(_cardForm.TooltipPath));
@@ -90,6 +50,51 @@ namespace D3BitGUI
                                                   _cardForm.UIThread(() => Clipboard.SetText(link));
                                                   InvokeScript("Signal", string.Format("Success! Link {0} copied to Clipboard.", link));
                                                   GUI.Log("Uploaded. {0}", link);
+                                              }
+                                              else
+                                              {
+                                                  InvokeScript("Signal", "Error Uploading.");
+                                              }
+                                          }
+                                          else
+                                          {
+                                              Dictionary<string, object> postParameters = new Dictionary<string, object>();
+                                              postParameters.Add("filename", Path.GetFileName(_cardForm.TooltipPath));
+                                              postParameters.Add("fileformat", Path.GetExtension(_cardForm.TooltipPath));
+                                              postParameters.Add("xyz", "placeholder");
+                                              postParameters.Add("n", itemName);
+                                              postParameters.Add("q", itemQuality);
+                                              postParameters.Add("d", itemDps);
+                                              postParameters.Add("t", itemType);
+                                              postParameters.Add("a", itemStats);
+                                              int x;
+                                              if (int.TryParse(destin, out x))
+                                                  postParameters.Add("aid", x);
+                                              postParameters.Add("s", Properties.Settings.Default.Secret.Trim());
+                                              postParameters.Add("uploadedfile", data);
+
+                                              
+
+                                              // Create request and receive response
+                                              string postURL = "http://d3bit.com/ajax/uploaditem/";
+                                              string userAgent =
+                                                  "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3";
+                                              HttpWebResponse webResponse = Util.MultipartFormDataPost(postURL, userAgent, postParameters);
+                                              StreamReader responseReader = new StreamReader(webResponse.GetResponseStream());
+                                              string res = responseReader.ReadToEnd();
+                                              webResponse.Close();
+
+                                              JObject o = JObject.Parse(res);
+                                              if (o["status"] != null && o["status"].ToString() == "success" && o["link"] != null)
+                                              {
+                                                  _cardForm.UIThread(() => Clipboard.SetText(o["link"].ToString()));
+                                                  InvokeScript("Signal", string.Format("Success! Link {0} copied to Clipboard.", o["link"]));
+
+                                                  GUI.Log("Uploaded. {0}", o["link"]);
+                                              }
+                                              else if (o["msg"] != null)
+                                              {
+                                                  InvokeScript("Signal", o["msg"]);
                                               }
                                               else
                                               {

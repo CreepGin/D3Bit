@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tbBattletag = new System.Windows.Forms.TextBox();
             this.cbScanKey = new System.Windows.Forms.ComboBox();
             this.tbSecret = new System.Windows.Forms.TextBox();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // label1
@@ -119,6 +121,12 @@
             this.tbSecret.Text = global::D3BitGUI.Properties.Settings.Default.Secret;
             this.tbSecret.TextChanged += new System.EventHandler(this.tbSecret_TextChanged);
             // 
+            // toolTip
+            // 
+            this.toolTip.AutoPopDelay = 8000;
+            this.toolTip.InitialDelay = 500;
+            this.toolTip.ReshowDelay = 100;
+            // 
             // UCOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -144,5 +152,6 @@
         private System.Windows.Forms.ComboBox cbScanKey;
         private System.Windows.Forms.TextBox tbBattletag;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
