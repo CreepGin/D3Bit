@@ -51,30 +51,69 @@ namespace D3Bit
         {
             string itemType = "Unknown";
             quality = "Unknown";
-            Func<Color, bool> colorFunc =
-                c =>
-                ImageUtil.GetGrayValue(c) > 130 && !(Math.Abs(c.R - c.G) < 30 && Math.Abs(c.G - c.B) < 30);
-            Bound itemTypebound = ImageUtil.GetBlockBounding(Resized,
-                                                                 new Bound(new Point(s(82 / 410.0), s(55 / 410.0)), new Point(s(270 / 410.0), s(90 / 410.0))), colorFunc).Expand(6);
-            if (itemTypebound.Height > s(30 / 411.0))
-                itemTypebound = new Bound(new Point(itemTypebound.P1.X, itemTypebound.P1.Y), new Point(itemTypebound.P2.X, itemTypebound.P1.Y + s(30 / 411.0)));
-            if (itemTypebound.Width < 5)
-                return itemType;
-            ImageUtil.DrawBlockBounding(Processed, itemTypebound);
-            Bitmap itemTypeBlock = Resized.Clone(itemTypebound.ToRectangle(), Resized.PixelFormat);
-            itemTypeBlock = ImageUtil.ResizeImage(itemTypeBlock, itemTypeBlock.Width * 8, itemTypeBlock.Height * 8);
-            //itemTypeBlock = ImageUtil.ResizeImage(itemTypeBlock, (int)(80.0 / itemTypeBlock.Height * itemTypeBlock.Width), 80);
-            string text = Tesseract.GetTextFromBitmap(ImageUtil.Sharpen(itemTypeBlock)).Replace("\r", "").Replace("\n", " ");
-            var words = text.Split(new[] { ' ' });
-            if (words.Length > 1)
+            try
             {
-                string qualityString = words[0];
-                quality = Data.ItemQualities.OrderByDescending(i => qualityString.DiceCoefficient(i)).FirstOrDefault();
-                itemType = String.Join(" ", words.Skip(1));
-                itemType = Data.ItemTypes.OrderByDescending(i => itemType.DiceCoefficient(i)).FirstOrDefault();
-                return itemType;
+                Func<Color, bool> colorFunc =
+                    c =>
+                    ImageUtil.GetGrayValue(c) > 130 && !(Math.Abs(c.R - c.G) < 30 && Math.Abs(c.G - c.B) < 30);
+                Bound itemTypebound = ImageUtil.GetBlockBounding(Resized,
+                                                                 new Bound(new Point(s(82 / 410.0), s(55 / 410.0)),
+                                                                           new Point(s(270 / 410.0), s(92 / 400.0))),
+                                                                 colorFunc).Expand(6);
+                if (itemTypebound.Height > s(46 / 400.0))
+                    itemTypebound = new Bound(new Point(itemTypebound.P1.X, itemTypebound.P1.Y),
+                                              new Point(itemTypebound.P2.X, itemTypebound.P1.Y + s(30 / 411.0)));
+                if (itemTypebound.Width < 5)
+                    return itemType;
+                ImageUtil.DrawBlockBounding(Processed, itemTypebound);
+                Bitmap itemTypeBlock = Resized.Clone(itemTypebound.ToRectangle(), Resized.PixelFormat);
+                itemTypeBlock = ImageUtil.ResizeImage(itemTypeBlock, itemTypeBlock.Width * 8, itemTypeBlock.Height * 8);
+                //itemTypeBlock = ImageUtil.ResizeImage(itemTypeBlock, (int)(80.0 / itemTypeBlock.Height * itemTypeBlock.Width), 80);
+                string text =
+                    Tesseract.GetTextFromBitmap(ImageUtil.Sharpen(itemTypeBlock)).Replace("\r", "").Replace("\n", " ");
+                var words = text.Split(new[] { ' ' });
+                if (words.Length > 1)
+                {
+                    string qualityString = words[0];
+                    quality =
+                        Data.ItemQualities.OrderByDescending(i => qualityString.DiceCoefficient(i)).FirstOrDefault();
+                    itemType = String.Join(" ", words.Skip(1));
+                    itemType = Data.ItemTypes.OrderByDescending(i => itemType.DiceCoefficient(i)).FirstOrDefault();
+                    return itemType;
+                }
             }
+            catch { }
             return itemType;
+        }
+
+        public string ParseMeta()
+        {
+            Func<Color, bool> whiteFunc =
+                c => c.B > 150 && Math.Abs(c.R - c.G) < 8 && Math.Abs(c.R - c.B) < 8;
+            var bounds = ImageUtil.GetTextLineBounds(Resized,
+                                                     new Bound(new Point(80, 158 < Resized.Height ? 158 : Resized.Height),
+                                                               new Point(200, 218 < Resized.Height ? 218 : Resized.Height)),
+                                                     13,
+                                                     whiteFunc, 80, 200);
+            if (bounds.Count != 2)
+                return "";
+            List<string> res = new List<string>();
+            foreach (var bound in bounds)
+            {
+                if (bound.Width < 20)
+                    continue;
+                ImageUtil.DrawBlockBounding(Processed, bound);
+                var newBound = new Bound(new Point(bound.P1.X - 6, bound.P1.Y - 4),
+                                         new Point(bound.P2.X + 4, bound.P2.Y + 4));
+                var block = Resized.Clone(bound.Expand(3).ToRectangle(), Resized.PixelFormat);
+                block = ImageUtil.ResizeImage(block, block.Width * 6, block.Height * 6);
+                string text = Tesseract.GetTextFromBitmap(block, @"-psm 7 nobatch tesseract\d3meta");
+                text = text.Replace(" ", "").Replace("+", "");
+                if (text.StartsWith("4-") && text.EndsWith("70"))
+                    text = text.Replace("4-", "").Replace("70", "%");
+                res.Add(text);
+            }
+            return string.Join(",", res.ToArray());
         }
 
         
@@ -100,13 +139,14 @@ namespace D3Bit
             return dps;
         }
 
-        public Dictionary<string, string> ParseAffixes()
+        public Dictionary<string, string> ParseAffixes(out string socketBonuses)
         {
             Func<Color, bool> whiteFunc =
                 c => c.B > 160 && Math.Abs(c.R - c.G) < 1 && Math.Abs(c.R - c.B) < 1;
             Func<Color, bool> colorFunc =
                 c => c.B > 150 && c.G < 120 && c.R < 120 || whiteFunc(c);
             List<string> affixStrings = new List<string>();
+            socketBonuses = "";
 
             for (int y = _affixStartY; y < _affixStartY + 80; y++)
             {
@@ -143,8 +183,17 @@ namespace D3Bit
                 //block = ImageUtil.ResizeImage(block, (int)(80.0 / block.Height * block.Width), 80);
                 string text = Tesseract.GetTextFromBitmap(block);
                 if (Enumerable.Range(s(58 / 320.0), 15).Where(x => whiteFunc(Resized.GetPixel(x, bound.P1.Y + 4))).Count() > 0)
+                {
                     affixStrings.Add("Empty Socket");
-                else if (bound.P1.X < s(16/320.0))
+                    var pair = Data.affixMatches.Select(p => new { p.Key, p.Value, Coe = text.DiceCoefficient(p.Value) }).OrderByDescending(o => o.Coe).First();
+                    Match m;
+                    if (pair.Coe > 0.20 && (m = Regex.Match(text, "([0-9]+-[0-9]+|[0-9\\.]+)")).Success)
+                    {
+                        string v = m.Value + " " + pair.Key;
+                        socketBonuses += socketBonuses == "" ? v : ", " + v;
+                    }
+                }
+                else if (bound.P1.X < s(16 / 320.0))
                     affixStrings[affixStrings.Count - 1] += " " + text;
                 else
                     affixStrings.Add(text);

@@ -69,12 +69,13 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CardForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Item Card";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.Maroon;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CardForm_FormClosing);
             this.Load += new System.EventHandler(this.CardForm_Load);
+            this.LocationChanged += new System.EventHandler(this.CardForm_LocationChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CardForm_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CardForm_MouseDown);
             this.ResumeLayout(false);

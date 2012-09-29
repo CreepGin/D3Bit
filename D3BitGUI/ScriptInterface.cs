@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -18,6 +19,11 @@ namespace D3BitGUI
         public ScriptInterface(CardForm cardForm)
         {
             _cardForm = cardForm;
+        }
+
+        public void OpenLink(string link)
+        {
+            Process.Start(link);
         }
 
         public void Upload(string destin, string itemName, string itemQuality, string itemType, string itemDps, string itemStats) 

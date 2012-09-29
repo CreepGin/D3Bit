@@ -113,6 +113,7 @@ namespace D3Bit
                                                                  {"MF", "{I}% Better Chance of Finding Magical Items"},
                                                                  {"GF", "{I}% Extra Gold from Monsters"},
                                                                  {"Exp", "Monster kills grant +{I} experience."},
+                                                                 {"Exp%", "Increases Bonus Experience by {I}%"},
                                                                  {"MvSpd", "+{I}% Movement Speed"},
                                                                  {"Pick", "Increases Gold and Health Pickup by {I} Yards"},
                                                                  {"LvlRe", "Level Requirement Reduced by {I}"},

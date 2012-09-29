@@ -20,5 +20,17 @@
     <Setting Name="Battletag" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="D3UpUsername" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="D3UpDefaultBuild" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ItemCardStartPosition" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">200, 100</Value>
+    </Setting>
+    <Setting Name="D3UpDefaultBuildNumber" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

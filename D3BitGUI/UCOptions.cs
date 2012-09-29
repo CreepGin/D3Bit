@@ -5,12 +5,17 @@ using System.Drawing;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
+using Newtonsoft.Json.Linq;
 
 namespace D3BitGUI
 {
     public partial class UCOptions : UserControl
     {
+        private Thread t;
+        private Dictionary<string, string> _builds = new Dictionary<string, string>();
+
         public UCOptions()
         {
             InitializeComponent();
@@ -19,6 +24,38 @@ namespace D3BitGUI
             //Tooltips
             toolTip.SetToolTip(tbBattletag, "Will be used for fetching your BNet profile in the future.");
             toolTip.SetToolTip(tbSecret, "Your account secret can be obtained after logging in on d3bit.com");
+            toolTip.SetToolTip(bReloadBuilds, "Re-load your builds from D3Up");
+            t = new Thread(ReloadBuilds);
+            t.Start();
+        }
+
+        void ReloadBuilds()
+        {
+            try
+            {
+                string res = Util.GetPageSource("http://d3up.com/ajax/builds?username=" + Properties.Settings.Default.D3UpUsername);
+                JObject o = JObject.Parse(res);
+                if (o["builds"] != null)
+                {
+                    var builds = o["builds"];
+                    _builds = builds.ToObject<Dictionary<string, string>>();
+                    var buildNames = _builds.Select(b => b.Value).ToArray();
+                    this.UIThread(() =>
+                    {
+                        cbDefaultBuild.Items.Clear();
+                        cbDefaultBuild.Items.AddRange(buildNames);
+                    });
+                    GUI.Log(_builds.Count + " Builds loaded from D3Up.com");
+                }
+                else
+                {
+                    throw new Exception("No builds");
+                }
+            }
+            catch (Exception ex)
+            {
+                GUI.Log("Cannot fetch default build. Please check your d3up username.");
+            }
         }
 
         private void tbSecret_TextChanged(object sender, EventArgs e)
@@ -37,6 +74,25 @@ namespace D3BitGUI
         {
             Properties.Settings.Default.Battletag = tbBattletag.Text;
             Properties.Settings.Default.Save();
+        }
+
+        private void tbD3UpUsername_TextChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.D3UpUsername = tbD3UpUsername.Text;
+            Properties.Settings.Default.Save();
+        }
+
+        private void cbDefaultBuild_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.D3UpDefaultBuild = cbDefaultBuild.SelectedItem.ToString();
+            Properties.Settings.Default.Save();
+            Properties.Settings.Default.D3UpDefaultBuildNumber = int.Parse(_builds.ToArray()[cbDefaultBuild.SelectedIndex].Key);
+        }
+
+        private void bReloadBuilds_Click(object sender, EventArgs e)
+        {
+            t = new Thread(ReloadBuilds);
+            t.Start();
         }
 
 

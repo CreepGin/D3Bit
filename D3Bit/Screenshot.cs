@@ -151,11 +151,13 @@ namespace D3Bit
 
                 Bitmap bmp = new Bitmap(rc.Width, rc.Height, PixelFormat.Format24bppRgb);
                 Graphics gfxBmp = Graphics.FromImage(bmp);
-                IntPtr hdcBitmap = gfxBmp.GetHdc();
+                //IntPtr hdcBitmap = gfxBmp.GetHdc();
 
-                PrintWindow(d3Proc.MainWindowHandle, hdcBitmap, 0);
+                //PrintWindow(d3Proc.MainWindowHandle, hdcBitmap, 0);
+                gfxBmp.CopyFromScreen(rc.X, rc.Y, 0, 0, new Size(rc.Width, rc.Height), CopyPixelOperation.SourceCopy);
 
-                gfxBmp.ReleaseHdc(hdcBitmap);
+
+                //gfxBmp.ReleaseHdc(hdcBitmap);
                 gfxBmp.Dispose();
 
                 return bmp;
@@ -165,15 +167,16 @@ namespace D3Bit
 
         public static Bitmap GetToolTip(Bitmap bitmap)
         {
-            var lines = ImageUtil.FindHorizontalLines(bitmap, 280, 600, new int[] { 0, 10, 0, 10, 0, 10 });
+            var lines = ImageUtil.FindHorizontalLines(bitmap, 260, 650, new int[] { 0, 10, 0, 10, 0, 10 });
             lines = lines.OrderBy(l => l.P1.X).ToList();
             var groups =
                 lines.GroupBy(l => l.P1.X).Where(
                     l =>
                     l.Last().P1.Y - l.First().P1.Y > 200 &&
-                    l.Count() == l.Where(i => i.XLength == l.First().XLength).Count()).OrderByDescending(
-                        l => l.First().XLength);
-            
+                    l.Count() > 4 &&
+                    l.Count() == l.Where(i => Math.Abs(i.XLength - l.First().XLength) < i.XLength*0.1).Count()).OrderByDescending(
+                        l => l.First().XLength).ThenByDescending(l => l.Count());
+            int x = groups.Count();
             if (groups.Count() > 0)
             {
                 lines = groups.ElementAt(0).ToList();

@@ -52,7 +52,8 @@ namespace D3BitGUI
                     string quality = "";
                     string type = tooltip.ParseItemType(out quality);
                     double dps = tooltip.ParseDPS();
-                    var affixes = tooltip.ParseAffixes();
+                    string socketBonuses = "";
+                    var affixes = tooltip.ParseAffixes(out socketBonuses);
                     if (name.Length > 0 && quality.Length > 0 && type.Length > 0 && affixes.Keys.Count > 0)
                     {
                         Dictionary<string, string> itemDic = new Dictionary<string, string>();

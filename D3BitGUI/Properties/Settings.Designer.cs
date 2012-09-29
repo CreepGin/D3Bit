@@ -94,5 +94,53 @@ namespace D3BitGUI.Properties {
                 this["Battletag"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string D3UpUsername {
+            get {
+                return ((string)(this["D3UpUsername"]));
+            }
+            set {
+                this["D3UpUsername"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string D3UpDefaultBuild {
+            get {
+                return ((string)(this["D3UpDefaultBuild"]));
+            }
+            set {
+                this["D3UpDefaultBuild"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200, 100")]
+        public global::System.Drawing.Point ItemCardStartPosition {
+            get {
+                return ((global::System.Drawing.Point)(this["ItemCardStartPosition"]));
+            }
+            set {
+                this["ItemCardStartPosition"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int D3UpDefaultBuildNumber {
+            get {
+                return ((int)(this["D3UpDefaultBuildNumber"]));
+            }
+            set {
+                this["D3UpDefaultBuildNumber"] = value;
+            }
+        }
     }
 }

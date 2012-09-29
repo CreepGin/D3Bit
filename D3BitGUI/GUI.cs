@@ -14,6 +14,7 @@ using System.Threading;
 using System.Windows.Forms;
 using D3Bit;
 using Gma.UserActivityMonitor;
+using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using Point = D3Bit.Point;
 
@@ -21,7 +22,7 @@ namespace D3BitGUI
 {
     public partial class GUI : Form
     {
-        private static string version = "1.1.5";
+        private static string version = "1.1.6e";
 #if DEBUG
         private static bool debugMode = true;
 #else
@@ -35,6 +36,16 @@ namespace D3BitGUI
         public GUI()
         {
             InitializeComponent();
+            try
+            {
+                Registry.SetValue(
+                    @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION",
+                    "D3BitGUI.exe", 8000);
+                Registry.SetValue(
+                    @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION",
+                    "D3BitGUI.exe", 8000);
+            }
+            catch { }
             HookManager.KeyUp += OnKeyUp;
             t = new Thread(()=>
                                {

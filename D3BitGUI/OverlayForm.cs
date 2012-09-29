@@ -186,7 +186,8 @@ namespace D3BitGUI
                 _progress++;
                 dps = tooltip.ParseDPS();
                 _progress++;
-                affixes = tooltip.ParseAffixes();
+                string socketBonuses = "";
+                affixes = tooltip.ParseAffixes(out socketBonuses);
                 stats = String.Join(", ", affixes.Select(kv => (kv.Value + " " + kv.Key).Trim()));
                 _progress++;
                 this.UIThread(() => panel2.Location = new Point(0, 400));

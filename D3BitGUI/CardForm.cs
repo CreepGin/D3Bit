@@ -43,7 +43,7 @@ namespace D3BitGUI
 
         public string TooltipPath { get; private set; }
 
-        private int MAX_PROGRESS_STEPS = 5;
+        private int MAX_PROGRESS_STEPS = 6;
 
         private Bitmap _bitmap;
         private Bitmap _tooltipBitmap;
@@ -57,6 +57,9 @@ namespace D3BitGUI
         public CardForm()
         {
             InitializeComponent();
+            Location = Properties.Settings.Default.ItemCardStartPosition;
+            this.Cursor = Cursors.SizeAll;
+
             browser.ObjectForScripting = new ScriptInterface(this);
             string bgPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bg.jpg");
             browser.DocumentText = "<body style=\"background:url(" + bgPath + ")\"></body>";
@@ -64,6 +67,7 @@ namespace D3BitGUI
             _info.Add("name", "");
             _info.Add("quality", "");
             _info.Add("type", "");
+            _info.Add("meta", "");
             _info.Add("dps", "");
             _info.Add("stats", "");
         }
@@ -93,20 +97,28 @@ namespace D3BitGUI
                 _progressStep++;
                 _info["name"] = tooltip.ParseItemName();
                 _progressStep++;
-                string quality = "";
+                string quality = "Unknown";
                 _info["type"] = tooltip.ParseItemType(out quality);
                 _info["quality"] = quality;
                 _progressStep++;
+                _info["meta"] = tooltip.ParseMeta();
+                _progressStep++;
                 _info["dps"] = tooltip.ParseDPS()+"";
                 _progressStep++;
-                _affixes = tooltip.ParseAffixes();
+                string socketBonuses = "";
+                _affixes = tooltip.ParseAffixes(out socketBonuses);
+                if (socketBonuses != "")
+                    _info["meta"] += _info["meta"] == "" ? socketBonuses : "," + socketBonuses;
                 _info["stats"] = String.Join(", ", _affixes.Select(kv => (kv.Value + " " + kv.Key).Trim()));
                 _progressStep++;
                 tooltip.Processed.Save("s.png", ImageFormat.Png);
                 this.UIThread(() => progressBar.Location = new Point(800, 800));
 
                 Func<string, string> u = System.Uri.EscapeDataString;
-                string url = String.Format("http://d3bit.com/c/?image={0}&battletag={1}&secret={2}&{3}", u(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, TooltipPath)), u(Properties.Settings.Default.Battletag), Properties.Settings.Default.Secret.Trim(), Util.FormGetString(_info));
+                string url = String.Format("http://d3bit.com/c/?image={0}&battletag={1}&build={2}&secret={3}&{4}&test=1",
+                                           u(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, TooltipPath)),
+                                           u(Properties.Settings.Default.Battletag), Properties.Settings.Default.D3UpDefaultBuildNumber,
+                                           u(Properties.Settings.Default.Secret.Trim()), Util.FormGetString(_info));
                 browser.Url = new Uri(url);
                 //GUI.Log(url);
 
@@ -114,8 +126,10 @@ namespace D3BitGUI
                 this.UIThread(BringToFront);
                 //this.UIThread(() => TopMost = false);
             }
-            catch
+            catch (Exception ex)
             {
+                GUI.Log(ex.Message);
+                GUI.Log(ex.StackTrace);
                 this.UIThread(Abort);
                 return;
             }
@@ -181,6 +195,12 @@ namespace D3BitGUI
             }
             if (_needToClose)
                 Close();
+        }
+
+        private void CardForm_LocationChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ItemCardStartPosition = Location;
+            Properties.Settings.Default.Save();
         }
     }
 }
