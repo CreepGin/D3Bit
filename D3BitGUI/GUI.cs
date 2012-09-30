@@ -22,7 +22,7 @@ namespace D3BitGUI
 {
     public partial class GUI : Form
     {
-        private static string version = "1.1.6e";
+        private static string version = "1.1.6g";
 #if DEBUG
         private static bool debugMode = true;
 #else
@@ -40,10 +40,10 @@ namespace D3BitGUI
             {
                 Registry.SetValue(
                     @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION",
-                    "D3BitGUI.exe", 8000);
+                    "D3BitGUI.exe", 9999);
                 Registry.SetValue(
                     @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION",
-                    "D3BitGUI.exe", 8000);
+                    "D3BitGUI.exe", 9999);
             }
             catch { }
             HookManager.KeyUp += OnKeyUp;
