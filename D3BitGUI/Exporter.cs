@@ -38,5 +38,8 @@ namespace D3BitGUI
                 File.WriteAllText(savepath, res);
             }
         }
+
+        
+
     }
 }

@@ -32,5 +32,8 @@
     <Setting Name="D3UpDefaultBuildNumber" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="ScanLanguage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">eng</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -13,6 +13,7 @@ namespace D3Bit
     public static class Tesseract
     {
         private static Hunspell hunspell = new Hunspell("en_us.aff", "en_us.dic");
+        public static string language_code = "eng";
 
         public static string GetTextFromBitmap(Bitmap bitmap)
         {
@@ -24,7 +25,7 @@ namespace D3Bit
             //StopWatch sw = new StopWatch();
             bitmap.Save(@"tesseract\x.png", ImageFormat.Png);
             //sw.Lap("File Save");
-            ProcessStartInfo info = new ProcessStartInfo(@"tesseract\tesseract.exe", @"tesseract\x.png tesseract\x " + extraParams);
+            ProcessStartInfo info = new ProcessStartInfo(@"tesseract\tesseract.exe", string.Format(@"tesseract\x.png tesseract\x -l {0} {1}", language_code, extraParams));
             info.WindowStyle = ProcessWindowStyle.Hidden;
             Process p = Process.Start(info);
             p.WaitForExit();

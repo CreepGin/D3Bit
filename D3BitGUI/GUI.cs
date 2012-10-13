@@ -22,7 +22,7 @@ namespace D3BitGUI
 {
     public partial class GUI : Form
     {
-        private static string version = "1.1.6g";
+        private static string version = "1.1.7";
 #if DEBUG
         private static bool debugMode = true;
 #else
@@ -71,6 +71,7 @@ namespace D3BitGUI
             Text += " " + version;
             notifyIcon1.Text = "D3Bit " + version;
             (new System.IO.DirectoryInfo("tmp")).Empty();
+            D3Bit.Data.LoadAffixes(Properties.Settings.Default.ScanLanguage);
 
             /*
             var s = new StopWatch();

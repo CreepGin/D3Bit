@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D3BitGUI", "D3BitGUI\D3BitG
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D3Bit", "D3Bit\D3Bit.csproj", "{A6BAD0D8-4F72-4DEF-A88B-6F786A221EA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D3BitConsole", "D3BitConsole\D3BitConsole.csproj", "{44016DE9-AA93-4C12-86A0-FC47CBA865E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,16 @@ Global
 		{A6BAD0D8-4F72-4DEF-A88B-6F786A221EA4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A6BAD0D8-4F72-4DEF-A88B-6F786A221EA4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A6BAD0D8-4F72-4DEF-A88B-6F786A221EA4}.Release|x86.ActiveCfg = Release|Any CPU
+		{44016DE9-AA93-4C12-86A0-FC47CBA865E0}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{44016DE9-AA93-4C12-86A0-FC47CBA865E0}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{44016DE9-AA93-4C12-86A0-FC47CBA865E0}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{44016DE9-AA93-4C12-86A0-FC47CBA865E0}.Debug|x86.ActiveCfg = Debug|x86
+		{44016DE9-AA93-4C12-86A0-FC47CBA865E0}.Debug|x86.Build.0 = Debug|x86
+		{44016DE9-AA93-4C12-86A0-FC47CBA865E0}.Release|Any CPU.ActiveCfg = Release|x86
+		{44016DE9-AA93-4C12-86A0-FC47CBA865E0}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{44016DE9-AA93-4C12-86A0-FC47CBA865E0}.Release|Mixed Platforms.Build.0 = Release|x86
+		{44016DE9-AA93-4C12-86A0-FC47CBA865E0}.Release|x86.ActiveCfg = Release|x86
+		{44016DE9-AA93-4C12-86A0-FC47CBA865E0}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

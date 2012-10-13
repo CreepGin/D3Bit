@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using D3Bit;
 using Newtonsoft.Json.Linq;
 
 namespace D3BitGUI
@@ -22,9 +23,12 @@ namespace D3BitGUI
             if (LicenseManager.UsageMode != LicenseUsageMode.Runtime)
                 return;
             //Tooltips
-            toolTip.SetToolTip(tbBattletag, "Will be used for fetching your BNet profile in the future.");
+            toolTip.SetToolTip(tbLanguage, "Localization code. Please refer to the online User Guide for setting up for languages other than English.");
             toolTip.SetToolTip(tbSecret, "Your account secret can be obtained after logging in on d3bit.com");
             toolTip.SetToolTip(bReloadBuilds, "Re-load your builds from D3Up");
+
+            Tesseract.language_code = Properties.Settings.Default.ScanLanguage;
+
             t = new Thread(ReloadBuilds);
             t.Start();
         }
@@ -70,12 +74,6 @@ namespace D3BitGUI
             Properties.Settings.Default.Save();
         }
 
-        private void tbBattletag_TextChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.Battletag = tbBattletag.Text;
-            Properties.Settings.Default.Save();
-        }
-
         private void tbD3UpUsername_TextChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.D3UpUsername = tbD3UpUsername.Text;
@@ -93,6 +91,12 @@ namespace D3BitGUI
         {
             t = new Thread(ReloadBuilds);
             t.Start();
+        }
+
+        private void tbLanguage_TextChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ScanLanguage = tbLanguage.Text;
+            Properties.Settings.Default.Save();
         }
 
 
