@@ -220,8 +220,8 @@ namespace D3Bit
                     }
                     values.Add(m.Value);
                 }
-                else if ((m = Regex.Match(text, "[0-9\\.]+")).Success)
-                    values.Add(m.Value);
+                else if ((m = Regex.Match(text, "[0-9\\.,]+")).Success)
+                    values.Add(m.Value.Replace(",", "."));
 
                 if (values.Count == 0 && pair.Key != "Soc" && pair.Key != "Ind")
                     continue;
