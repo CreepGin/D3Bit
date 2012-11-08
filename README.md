@@ -1,6 +1,6 @@
 D3Bit is a tooltip scanner for Diablo 3. You can use it to parse item stats, upload cropped tooltips, batch process screenshots, etc...
 
-[D3Bit.com](http://d3bit.com/) - [Demo Youtube Video](http://www.youtube.com/watch?v=-mVm4cAsURk)
+[D3Bit.com](http://d3bit.com/) - [User Guide](http://d3up.com/guide/94/d3bit-user-guide) - [Demo Youtube Video](http://www.youtube.com/watch?v=-mVm4cAsURk)
 
 ### Project Content
 

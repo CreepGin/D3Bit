@@ -174,6 +174,7 @@ namespace D3Bit
                     l =>
                     l.Last().P1.Y - l.First().P1.Y > 200 &&
                     l.Count() > 4 &&
+                    GetMaxVerticalDistance(l.ToList()) > 80 &&
                     l.Count() == l.Where(i => Math.Abs(i.XLength - l.First().XLength) < i.XLength*0.1).Count()).OrderByDescending(
                         l => l.First().XLength).ThenByDescending(l => l.Count());
             int x = groups.Count();
@@ -206,5 +207,23 @@ namespace D3Bit
             }
             return null;
         }
+
+        //Helper function
+        static int GetMaxVerticalDistance(List<Line> lines)
+        {
+            if (lines.Count == 0)
+                return 0;
+            int maxDis = 0;
+            int lastY = lines[0].P1.Y;
+            foreach (var line in lines)
+            {
+                int diff = line.P1.Y - lastY;
+                if (diff > maxDis)
+                    maxDis = diff;
+                lastY = line.P1.Y;
+            }
+            return maxDis;
+        }
+
     }
 }
