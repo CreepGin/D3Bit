@@ -102,6 +102,7 @@ namespace D3Bit
                                                                  {"MinD", "+{I} Minimum Damage"},
                                                                  {"MaxD", "+{I} Maximum Damage"},
                                                                  {"AtkSpd", "Increases Attack Speed by {I}%"},
+                                                                 {"APS", "+{D} Attacks per Second"},
                                                                  {"Crit", "Critical Hit Chance Increased by {D}%"},
                                                                  {"CritD", "Critical Hit Damage Increased by {I}%"},
                                                                  //Life-Related

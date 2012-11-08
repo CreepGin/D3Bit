@@ -87,7 +87,7 @@
             // 
             // bReloadBuilds
             // 
-            this.bReloadBuilds.Location = new System.Drawing.Point(0, 78);
+            this.bReloadBuilds.Location = new System.Drawing.Point(0, 51);
             this.bReloadBuilds.Name = "bReloadBuilds";
             this.bReloadBuilds.Size = new System.Drawing.Size(18, 22);
             this.bReloadBuilds.TabIndex = 10;
