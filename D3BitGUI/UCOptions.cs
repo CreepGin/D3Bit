@@ -37,7 +37,8 @@ namespace D3BitGUI
         {
             try
             {
-                string res = Util.GetPageSource("http://d3up.com/ajax/builds?username=" + Properties.Settings.Default.D3UpUsername);
+                Func<string, string> u = System.Uri.EscapeDataString;
+                string res = Util.GetPageSource("http://d3up.com/ajax/builds?username=" + u(Properties.Settings.Default.D3UpUsername));
                 JObject o = JObject.Parse(res);
                 if (o["builds"] != null)
                 {
