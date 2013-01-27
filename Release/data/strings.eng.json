@@ -1,0 +1,57 @@
+{
+  "ItemQualities": [
+    "Magic",
+    "Rare",
+    "Legendary",
+    "Set"
+  ],
+  "WeaponTypes": [
+    "Axe",
+    "Ceremonial Knife",
+    "Hand Crossbow",
+    "Dagger",
+    "Fist Weapon",
+    "Mace",
+    "Mighty Weapon",
+    "Spear",
+    "Sword",
+    "Wand",
+    "Two-Handed Axe",
+    "Bow",
+    "Daibo",
+    "Crossbow",
+    "Two-Handed Mace",
+    "Two-Handed Mighty Weapon",
+    "Polearm",
+    "Staff",
+    "Two-Handed Sword"
+  ],
+  "OffHandTypes": [
+    "Mojo",
+    "Source",
+    "Quiver"
+  ],
+  "FollowerTypes": [
+    "Enchantress Focus",
+    "Scoundrel Token",
+    "Templar Relic"
+  ],
+  "CommonTypes": [
+    "Shield",
+    "Ring",
+    "Amulet",
+    "Shoulders",
+    "Helm",
+    "Pants",
+    "Gloves",
+    "Chest Armor",
+    "Bracers",
+    "Boots",
+    "Belt",
+    "Cloak",
+    "Mighty Belt",
+    "Spirit Stone",
+    "Voodoo Mask",
+    "Wizard Hat"
+  ]
+}

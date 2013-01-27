@@ -215,6 +215,13 @@ namespace D3Bit
         {
             string json = File.ReadAllText(string.Format(@"data\affixes.{0}.json", languageCode));
             affixMatches = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            json = File.ReadAllText(string.Format(@"data\strings.{0}.json", languageCode));
+            var strings = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(json);
+            ItemQualities = strings["ItemQualities"];
+            WeaponTypes = strings["WeaponTypes"];
+            OffHandTypes = strings["OffHandTypes"];
+            FollowerTypes = strings["FollowerTypes"];
+            CommonTypes = strings["CommonTypes"];
         }
 
     }
