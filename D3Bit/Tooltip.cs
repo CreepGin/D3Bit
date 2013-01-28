@@ -211,7 +211,7 @@ namespace D3Bit
                 Match m = Regex.Match(text, "[0-9]+-[0-9]+");
                 if (m.Success)
                 {
-                    if (pair.Key == "Dmg")
+                    if((pair.Key == "Dmg") || (pair.Key == "Dmg%"))
                     {
                         var parts = m.Value.Split(new char[] {'-'});
                         res.Add("MinD", parts[0]);
