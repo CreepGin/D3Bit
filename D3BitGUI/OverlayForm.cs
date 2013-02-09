@@ -217,9 +217,9 @@ namespace D3BitGUI
             while (oldProgresses.Count() > 0)
                 this.UIThread(() => panel1.Controls.Remove(oldProgresses.First()));
             string generalType = type;
-            if (D3Bit.Data.WeaponTypes.Contains(type))
+            if (D3Bit.Data.WeaponTypes.Keys.Contains(type))
                 generalType = "Weapon";
-            if (D3Bit.Data.OffHandTypes.Contains(type))
+            if (D3Bit.Data.OffHandTypes.Keys.Contains(type))
                 generalType = "Off-Hand";
             int stars = 0;
             if (Data.MaxStats.Where(t => t.EquipmentType == generalType).Count() > 0)

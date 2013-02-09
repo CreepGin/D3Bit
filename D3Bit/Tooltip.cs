@@ -76,9 +76,9 @@ namespace D3Bit
                 {
                     string qualityString = words[0];
                     quality =
-                        Data.ItemQualities.OrderByDescending(i => qualityString.DiceCoefficient(i)).FirstOrDefault();
+                        Data.ItemQualities.OrderByDescending(i => qualityString.DiceCoefficient(i.Value)).First().Key;
                     itemType = String.Join(" ", words.Skip(1));
-                    itemType = Data.ItemTypes.OrderByDescending(i => itemType.DiceCoefficient(i)).FirstOrDefault();
+                    itemType = Data.ItemTypes.OrderByDescending(i => itemType.DiceCoefficient(i.Value)).First().Key;
                     return itemType;
                 }
             }
