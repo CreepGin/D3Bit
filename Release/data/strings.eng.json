@@ -1,57 +1,57 @@
 {
-  "ItemQualities": [
-    "Magic",
-    "Rare",
-    "Legendary",
-    "Set"
-  ],
-  "WeaponTypes": [
-    "Axe",
-    "Ceremonial Knife",
-    "Hand Crossbow",
-    "Dagger",
-    "Fist Weapon",
-    "Mace",
-    "Mighty Weapon",
-    "Spear",
-    "Sword",
-    "Wand",
-    "Two-Handed Axe",
-    "Bow",
-    "Daibo",
-    "Crossbow",
-    "Two-Handed Mace",
-    "Two-Handed Mighty Weapon",
-    "Polearm",
-    "Staff",
-    "Two-Handed Sword"
-  ],
-  "OffHandTypes": [
-    "Mojo",
-    "Source",
-    "Quiver"
-  ],
-  "FollowerTypes": [
-    "Enchantress Focus",
-    "Scoundrel Token",
-    "Templar Relic"
-  ],
-  "CommonTypes": [
-    "Shield",
-    "Ring",
-    "Amulet",
-    "Shoulders",
-    "Helm",
-    "Pants",
-    "Gloves",
-    "Chest Armor",
-    "Bracers",
-    "Boots",
-    "Belt",
-    "Cloak",
-    "Mighty Belt",
-    "Spirit Stone",
-    "Voodoo Mask",
-    "Wizard Hat"
-  ]
+  "ItemQualities": {
+    "Magic": "Magic",
+    "Rare": "Rare",
+    "Legendary": "Legendary",
+    "Set": "Set"
+  },
+  "WeaponTypes": {
+    "Axe": "Axe",
+    "Ceremonial Knife": "Ceremonial Knife",
+    "Hand Crossbow": "Hand Crossbow",
+    "Dagger": "Dagger",
+    "Fist Weapon": "Fist Weapon",
+    "Mace": "Mace",
+    "Mighty Weapon": "Mighty Weapon",
+    "Spear": "Spear",
+    "Sword": "Sword",
+    "Wand": "Wand",
+    "Two-Handed Axe": "Two-Handed Axe",
+    "Bow": "Bow",
+    "Daibo": "Daibo",
+    "Crossbow": "Crossbow",
+    "Two-Handed Mace": "Two-Handed Mace",
+    "Two-Handed Mighty Weapon": "Two-Handed Mighty Weapon",
+    "Polearm": "Polearm",
+    "Staff": "Staff",
+    "Two-Handed Sword": "Two-Handed Sword"
+  },
+  "OffHandTypes": {
+    "Mojo": "Mojo",
+    "Source": "Source",
+    "Quiver": "Quiver"
+  },
+  "FollowerTypes": {
+    "Enchantress Focus": "Enchantress Focus",
+    "Scoundrel Token": "Scoundrel Token",
+    "Templar Relic": "Templar Relic"
+  },
+  "CommonTypes": {
+    "Shield": "Shield",
+    "Ring": "Ring",
+    "Amulet": "Amulet",
+    "Shoulders": "Shoulders",
+    "Helm": "Helm",
+    "Pants": "Pants",
+    "Gloves": "Gloves",
+    "Chest Armor": "Chest Armor",
+    "Bracers": "Bracers",
+    "Boots": "Boots",
+    "Belt": "Belt",
+    "Cloak": "Cloak",
+    "Mighty Belt": "Mighty Belt",
+    "Spirit Stone": "Spirit Stone",
+    "Voodoo Mask": "Voodoo Mask",
+    "Wizard Hat": "Wizard Hat"
+  }
 }
