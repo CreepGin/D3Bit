@@ -154,5 +154,17 @@ namespace D3BitGUI.Properties {
                 this["ScanLanguage"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ReverseQuality {
+            get {
+                return ((bool)(this["ReverseQuality"]));
+            }
+            set {
+                this["ReverseQuality"] = value;
+            }
+        }
     }
 }

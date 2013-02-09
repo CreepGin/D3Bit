@@ -98,7 +98,7 @@ namespace D3BitGUI
                 _info["name"] = tooltip.ParseItemName();
                 _progressStep++;
                 string quality = "Unknown";
-                _info["type"] = tooltip.ParseItemType(out quality);
+                _info["type"] = tooltip.ParseItemType(out quality, Properties.Settings.Default.ReverseQuality);
                 _info["quality"] = quality;
                 _progressStep++;
                 _info["meta"] = tooltip.ParseMeta();

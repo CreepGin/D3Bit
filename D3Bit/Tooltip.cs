@@ -49,6 +49,11 @@ namespace D3Bit
 
         public string ParseItemType(out string quality)
         {
+            return ParseItemType(out quality, false);
+        }
+
+        public string ParseItemType(out string quality, bool reverseQuality)
+        {
             string itemType = "Unknown";
             quality = "Unknown";
             try
@@ -74,12 +79,25 @@ namespace D3Bit
                 var words = text.Split(new[] { ' ' });
                 if (words.Length > 1)
                 {
-                    string qualityString = words[0];
-                    quality =
-                        Data.ItemQualities.OrderByDescending(i => qualityString.DiceCoefficient(i.Value)).First().Key;
-                    itemType = String.Join(" ", words.Skip(1));
-                    itemType = Data.ItemTypes.OrderByDescending(i => itemType.DiceCoefficient(i.Value)).First().Key;
-                    return itemType;
+                    if (reverseQuality)
+                    {
+                        string qualityString = words[words.Length - 1];
+                        quality =
+                            Data.ItemQualities.OrderByDescending(i => qualityString.DiceCoefficient(i.Value)).First().Key;
+                        itemType = String.Join(" ", words.Take(words.Length - 1));
+                        itemType = Data.ItemTypes.OrderByDescending(i => itemType.DiceCoefficient(i.Value)).First().Key;
+                        return itemType;
+                    }
+                    else
+                    {
+                        string qualityString = words[0];
+                        quality =
+                            Data.ItemQualities.OrderByDescending(i => qualityString.DiceCoefficient(i.Value)).First().Key;
+                        itemType = String.Join(" ", words.Skip(1));
+                        itemType = Data.ItemTypes.OrderByDescending(i => itemType.DiceCoefficient(i.Value)).First().Key;
+                        return itemType;
+                    }
+                    
                 }
             }
             catch { }

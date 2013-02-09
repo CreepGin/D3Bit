@@ -50,7 +50,7 @@ namespace D3BitGUI
                     Tooltip tooltip = new D3Bit.Tooltip(res);
                     string name = tooltip.ParseItemName();
                     string quality = "";
-                    string type = tooltip.ParseItemType(out quality);
+                    string type = tooltip.ParseItemType(out quality, Properties.Settings.Default.ReverseQuality);
                     double dps = tooltip.ParseDPS();
                     string socketBonuses = "";
                     var affixes = tooltip.ParseAffixes(out socketBonuses);

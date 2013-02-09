@@ -41,6 +41,7 @@
             this.tbD3UpUsername = new System.Windows.Forms.TextBox();
             this.cbScanKey = new System.Windows.Forms.ComboBox();
             this.tbSecret = new System.Windows.Forms.TextBox();
+            this.cbReverseQuality = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -183,10 +184,22 @@
             this.tbSecret.Text = global::D3BitGUI.Properties.Settings.Default.Secret;
             this.tbSecret.TextChanged += new System.EventHandler(this.tbSecret_TextChanged);
             // 
+            // cbReverseQuality
+            // 
+            this.cbReverseQuality.AutoSize = true;
+            this.cbReverseQuality.Location = new System.Drawing.Point(66, 133);
+            this.cbReverseQuality.Name = "cbReverseQuality";
+            this.cbReverseQuality.Size = new System.Drawing.Size(101, 17);
+            this.cbReverseQuality.TabIndex = 14;
+            this.cbReverseQuality.Text = "Reverse Quality";
+            this.cbReverseQuality.UseVisualStyleBackColor = true;
+            this.cbReverseQuality.CheckedChanged += new System.EventHandler(this.cbReverseQuality_CheckedChanged);
+            // 
             // UCOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cbReverseQuality);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbLanguage);
             this.Controls.Add(this.bReloadBuilds);
@@ -199,7 +212,7 @@
             this.Controls.Add(this.tbSecret);
             this.Controls.Add(this.label1);
             this.Name = "UCOptions";
-            this.Size = new System.Drawing.Size(190, 150);
+            this.Size = new System.Drawing.Size(190, 166);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -219,5 +232,6 @@
         private System.Windows.Forms.Button bReloadBuilds;
         private System.Windows.Forms.TextBox tbLanguage;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox cbReverseQuality;
     }
 }
