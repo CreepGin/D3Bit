@@ -52,6 +52,7 @@ namespace D3BitGUI
                     string quality = "";
                     string type = tooltip.ParseItemType(out quality, Properties.Settings.Default.ReverseQuality);
                     double dps = tooltip.ParseDPS();
+                    string meta = tooltip.ParseMeta();
                     string socketBonuses = "";
                     var affixes = tooltip.ParseAffixes(out socketBonuses);
                     if (name.Length > 0 && quality.Length > 0 && type.Length > 0 && affixes.Keys.Count > 0)
@@ -60,6 +61,7 @@ namespace D3BitGUI
                         itemDic.Add("Name", name);
                         itemDic.Add("Quality", quality);
                         itemDic.Add("Type", type);
+                        itemDic.Add("Meta", meta);
                         itemDic.Add("DPS", dps + "");
                         itemDic.Add("Stats", String.Join(", ", affixes.Select(kv => (kv.Value + " " + kv.Key).Trim())));
                         data.Add(itemDic);

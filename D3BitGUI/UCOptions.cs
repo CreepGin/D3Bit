@@ -28,6 +28,7 @@ namespace D3BitGUI
             toolTip.SetToolTip(bReloadBuilds, "Re-load your builds from D3Up");
 
             Tesseract.language_code = Properties.Settings.Default.ScanLanguage;
+            Tesseract.language_code = "eng";
 
             t = new Thread(ReloadBuilds);
             t.Start();
