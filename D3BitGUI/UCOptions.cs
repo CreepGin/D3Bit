@@ -107,6 +107,12 @@ namespace D3BitGUI
             Properties.Settings.Default.Save();
         }
 
+        private void tbAuctionrName_TextChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.AuctionrName = tbAuctionrName.Text;
+            Properties.Settings.Default.Save();
+        }
+
 
 
     }

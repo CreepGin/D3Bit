@@ -36,12 +36,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.bReloadBuilds = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.cbReverseQuality = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tbAuctionrName = new System.Windows.Forms.TextBox();
             this.tbLanguage = new System.Windows.Forms.TextBox();
             this.cbDefaultBuild = new System.Windows.Forms.ComboBox();
             this.tbD3UpUsername = new System.Windows.Forms.TextBox();
             this.cbScanKey = new System.Windows.Forms.ComboBox();
             this.tbSecret = new System.Windows.Forms.TextBox();
-            this.cbReverseQuality = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -56,7 +58,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(31, 81);
+            this.label2.Location = new System.Drawing.Point(31, 107);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 2;
@@ -99,18 +101,50 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(0, 108);
+            this.label3.Location = new System.Drawing.Point(0, 134);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 13);
             this.label3.TabIndex = 12;
             this.label3.Text = "Scan Language:";
+            // 
+            // cbReverseQuality
+            // 
+            this.cbReverseQuality.AutoSize = true;
+            this.cbReverseQuality.Location = new System.Drawing.Point(66, 159);
+            this.cbReverseQuality.Name = "cbReverseQuality";
+            this.cbReverseQuality.Size = new System.Drawing.Size(101, 17);
+            this.cbReverseQuality.TabIndex = 14;
+            this.cbReverseQuality.Text = "Reverse Quality";
+            this.cbReverseQuality.UseVisualStyleBackColor = true;
+            this.cbReverseQuality.CheckedChanged += new System.EventHandler(this.cbReverseQuality_CheckedChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 82);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(80, 13);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Auctionr Name:";
+            // 
+            // tbAuctionrName
+            // 
+            this.tbAuctionrName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbAuctionrName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::D3BitGUI.Properties.Settings.Default, "AuctionrName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbAuctionrName.Location = new System.Drawing.Point(86, 79);
+            this.tbAuctionrName.Name = "tbAuctionrName";
+            this.tbAuctionrName.Size = new System.Drawing.Size(101, 20);
+            this.tbAuctionrName.TabIndex = 16;
+            this.tbAuctionrName.Text = global::D3BitGUI.Properties.Settings.Default.AuctionrName;
+            this.tbAuctionrName.TextChanged += new System.EventHandler(this.tbAuctionrName_TextChanged);
             // 
             // tbLanguage
             // 
             this.tbLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbLanguage.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::D3BitGUI.Properties.Settings.Default, "ScanLanguage", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.tbLanguage.Location = new System.Drawing.Point(86, 106);
+            this.tbLanguage.Location = new System.Drawing.Point(86, 132);
             this.tbLanguage.Name = "tbLanguage";
             this.tbLanguage.Size = new System.Drawing.Size(101, 20);
             this.tbLanguage.TabIndex = 11;
@@ -165,7 +199,7 @@
             "End",
             "PageUp",
             "PageDown"});
-            this.cbScanKey.Location = new System.Drawing.Point(86, 79);
+            this.cbScanKey.Location = new System.Drawing.Point(86, 105);
             this.cbScanKey.Name = "cbScanKey";
             this.cbScanKey.Size = new System.Drawing.Size(101, 21);
             this.cbScanKey.TabIndex = 3;
@@ -184,21 +218,12 @@
             this.tbSecret.Text = global::D3BitGUI.Properties.Settings.Default.Secret;
             this.tbSecret.TextChanged += new System.EventHandler(this.tbSecret_TextChanged);
             // 
-            // cbReverseQuality
-            // 
-            this.cbReverseQuality.AutoSize = true;
-            this.cbReverseQuality.Location = new System.Drawing.Point(66, 133);
-            this.cbReverseQuality.Name = "cbReverseQuality";
-            this.cbReverseQuality.Size = new System.Drawing.Size(101, 17);
-            this.cbReverseQuality.TabIndex = 14;
-            this.cbReverseQuality.Text = "Reverse Quality";
-            this.cbReverseQuality.UseVisualStyleBackColor = true;
-            this.cbReverseQuality.CheckedChanged += new System.EventHandler(this.cbReverseQuality_CheckedChanged);
-            // 
             // UCOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tbAuctionrName);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.cbReverseQuality);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbLanguage);
@@ -212,7 +237,7 @@
             this.Controls.Add(this.tbSecret);
             this.Controls.Add(this.label1);
             this.Name = "UCOptions";
-            this.Size = new System.Drawing.Size(190, 166);
+            this.Size = new System.Drawing.Size(190, 206);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -233,5 +258,7 @@
         private System.Windows.Forms.TextBox tbLanguage;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox cbReverseQuality;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox tbAuctionrName;
     }
 }

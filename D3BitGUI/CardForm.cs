@@ -115,9 +115,10 @@ namespace D3BitGUI
                 this.UIThread(() => progressBar.Location = new Point(800, 800));
 
                 Func<string, string> u = System.Uri.EscapeDataString;
-                string url = String.Format("http://d3bit.com/c/?image={0}&battletag={1}&build={2}&secret={3}&{4}&test=1",
+                string url = String.Format("http://d3bit.com/c/?image={0}&battletag={1}&build={2}&auctionrName={3}&secret={4}&{5}&test=1",
                                            u(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, TooltipPath)),
                                            u(Properties.Settings.Default.Battletag), Properties.Settings.Default.D3UpDefaultBuildNumber,
+                                           u(Properties.Settings.Default.AuctionrName),
                                            u(Properties.Settings.Default.Secret.Trim()), Util.FormGetString(_info));
                 browser.Url = new Uri(url);
                 //GUI.Log(url);

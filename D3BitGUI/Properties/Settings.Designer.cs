@@ -166,5 +166,17 @@ namespace D3BitGUI.Properties {
                 this["ReverseQuality"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AuctionrName {
+            get {
+                return ((string)(this["AuctionrName"]));
+            }
+            set {
+                this["AuctionrName"] = value;
+            }
+        }
     }
 }
