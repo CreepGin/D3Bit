@@ -1,12 +1,15 @@
-D3Bit is a tooltip scanner for Diablo 3. You can use it to parse item stats, upload cropped tooltips, batch process screenshots, etc...
+The D3Bit project has long being discontinued. Source code here will be used for reference purposes.
 
-[D3Bit.com](http://d3bit.com/) - [User Guide](http://d3up.com/guide/94/d3bit-user-guide) - [Demo Youtube Video](http://www.youtube.com/watch?v=-mVm4cAsURk)
+---
+
+D3Bit started during the first few months of the Diablo 3 lauch. it was a tooltip scanner for Diablo 3. One could use it to parse item stats, upload cropped tooltips, batch process screenshots, etc...
+
 
 ### Project Content
 
 The project consists of 2 parts. One is a Dll library that exposes some of the image processing and Tesseract functions. The other part is the GUI.
 
-Static classes Screenshot, Tesseract, and ImageUtil all expose useful functions that you can call.
+Static classes Screenshot, Tesseract, and ImageUtil expose useful functions that you can call.
 
 
     var procs = Process.GetProcessesByName("Diablo III");
@@ -21,4 +24,3 @@ Static classes Screenshot, Tesseract, and ImageUtil all expose useful functions 
     var affixes = tooltip.ParseAffixes();
     tooltip.Processed.Save("s.png", ImageFormat.Png);
 
-Sorry for the lack of doc and comment right now. But I'll try to help anyone with any problem over at the [Support Forum](http://d3bit.com/discuss/support/).
